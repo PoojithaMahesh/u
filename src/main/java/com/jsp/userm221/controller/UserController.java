@@ -3,6 +3,7 @@ package com.jsp.userm221.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,31 +26,46 @@ public class UserController {
 
 	
 	@PostMapping("/save")
-	public ResponseStructure<User> saveUser(@RequestBody User user) {
+	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
 	return	service.saveUser(user);
+	}
+	
+	
+	@GetMapping("/find")
+	public ResponseEntity<ResponseStructure<User>> findUserById(@RequestParam int id) {
+		return service.findUserById(id);
 	}
 	
 	
 	
 	
-//	@GetMapping("/find")
-//	public User findUserById(@RequestParam int id) {
-//		return userDao.findUserById(id);
-//	}
-//	
-//	@PutMapping("/update")
-//	public User updateUserById(@RequestParam int id,@RequestBody User user) {
-//		return userDao.updateUser(id,user);
-//	}
-//	
-//	@DeleteMapping("/delete")
-//	public User deleteUserById(@RequestParam int id) {
-//		return userDao.deleteUserById(id);
-//	}
-//	
-//	@GetMapping("/findall")
-//	public List<User> findAllUse(){
-//		return userDao.findAllUser();
-//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@PutMapping("/update")
+	public ResponseStructure<User> updateUserById(@RequestParam int id,@RequestBody User user) {
+		return service.updateUser(id,user);
+	}
+	
+	@DeleteMapping("/delete")
+	public ResponseStructure<User> deleteUserById(@RequestParam int id) {
+		return service.deleteUserById(id);
+	}
+	
+	@GetMapping("/findall")
+	public ResponseStructure<List<User>> findAllUse(){
+		return service.findAllUser();
+	}
 	
 }
